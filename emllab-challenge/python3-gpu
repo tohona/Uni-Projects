@@ -1,0 +1,10 @@
+#!/bin/bash
+docker run \
+    --runtime nvidia \
+    -it \
+    --rm \
+    -v $HOME:$HOME \
+    -e PYTHONPATH=`pwd`:$PYTHONPATH \
+    -e HOSTNAME=`hostname` \
+    --user jetson \
+    python3-gpu-${USER} bash -c "cd `pwd` && python3 $*"

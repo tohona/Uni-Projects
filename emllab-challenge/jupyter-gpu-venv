@@ -1,0 +1,15 @@
+#!/bin/bash
+docker run \
+    --runtime nvidia \
+    --network host \
+    -it \
+    --rm \
+    --memory 400M \
+    --memory-swap 4G \
+    -v $HOME:$HOME \
+    -e PYTHONPATH=$PYTHONPATH \
+    -e HOSTNAME=`hostname` \
+    -p 8888:8888 \
+    --user jetson \
+    --volume /tmp:/tmp \
+    python3-gpu-${USER} sh -c "cd ~/emllab-challenge && export PYTHONPATH=`pwd`:$PYTHONPATH && jupyter-lab --ip 0.0.0.0 --NotebookApp.token='' --NotebookApp.password=''"
